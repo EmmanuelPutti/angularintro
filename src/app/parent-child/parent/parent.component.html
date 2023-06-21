@@ -1,1 +1,11 @@
-<app-child [message]="parentMessage"></app-child>
+<app-child #child [message]="parentMessage" [count]="parentCount" (countEmitter)="countChangedHandler($event)"></app-child>
+<p>Parent Counter is: {{parentCount}}</p>
+<button class="btn btn-primary" (click)="child.increment()">Parent Increment</button>
+<button class="btn btn-secondary" (click)="child.decrement()">Parent Decrement</button>
+<br />
+<br />
+<button class="btn btn-primary" (click)="parentIncrement()">View Parent Increment</button>
+<button class="btn btn-secondary" (click)="parentDecrement()">View Parent Decrement</button>
+<br /><br />
+<p>{{name}}</p>
+<app-super-parent></app-super-parent>

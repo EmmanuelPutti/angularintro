@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { DataService } from '../services/data-service/data.service';
 
 @Component({
   selector: 'app-child',
@@ -7,11 +8,27 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ChildComponent implements OnInit {
 
-  @Input() message : string | undefined;
+  @Input() message : string | undefined;  
 
-  constructor() { }
+  @Input() count : number;
+  
+  @Output()
+  countEmitter : EventEmitter<number> = new EventEmitter();
+
+  constructor(private dateService : DataService) {}
 
   ngOnInit(): void {
+    this.dateService.changeName('Balloons');
+  }
+
+  increment(){
+    this.count++;
+    this.countEmitter.emit(this.count);
+  }
+
+  decrement(){
+     this.count--;
+    this.countEmitter.emit(this.count);
   }
 
 }
